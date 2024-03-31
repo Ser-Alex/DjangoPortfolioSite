@@ -253,18 +253,17 @@
 
 		if ( $(this).attr('href') != "#") {
 			$('#fh5co-main-nav a:not([class="external"]), #fh5co-offcanvas a:not([class="external"])').click(function(event){
-				var section = $(this).data('nav-section');
+    			var section = $(this).data('nav-section');
+				if (!$(this).hasClass('admin-link')) {
+					if ( $('div[data-section="' + section + '"]').length ) {
 
+						$('html, body').animate({
+							scrollTop: $('div[data-section="' + section + '"]').offset().top - topVal
+						}, 500);
 
-				if ( $('div[data-section="' + section + '"]').length ) {
-
-					$('html, body').animate({
-			        	scrollTop: $('div[data-section="' + section + '"]').offset().top - topVal
-			    	}, 500);	
-			    	
-			   }
-			   event.preventDefault();
-
+					}
+					event.preventDefault();
+				}
 			});
 		}
 

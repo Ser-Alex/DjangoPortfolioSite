@@ -55,6 +55,9 @@
 					<li><a href="#" data-nav-section="portfolio">Portfolio</a></li>
 					<li><a href="#" data-nav-section="about">About</a></li>
 					<li><a href="#" data-nav-section="contact">Contact</a></li>
+                    {% if user.is_superuser %}
+                        <li><a href="{% url 'admin:index' %}" target='_blank' class="admin-link">Admin</a></li>
+                    {% endif %}
 				</ul>
 			</nav>
 		</div>
