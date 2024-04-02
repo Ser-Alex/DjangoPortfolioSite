@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 
-from portfolio.models import HistoryWedding
+from portfolio.models import HistoryWedding, SiteSettings
 
 
 class IndexView(TemplateView):
@@ -11,12 +11,13 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         context['history_weddings'] = HistoryWedding.objects.filter(active=True)
-        context['image'] = 'static/images/main.jpg'
-        context['text_home'] = 'Мы любим рассказывать ваши истории'
-        context['text_portfolio'] = ('Откройте для себя моменты вечной любви и нежности где каждый кадр рассказывает уникальную историю о магии свадебного дня, '
-                                     'запечатлевая в себе эмоции и неповторимую атмосферу праздника. Погрузитесь в '
-                                     'мир красоты и чувств, где каждое фото – это дверь в мир ваших самых теплых '
-                                     'воспоминаний.')
+
+        if SiteSettings.objects.exists():
+            settings = SiteSettings.objects.first()
+            context['image'] = settings.image.url
+            context['text_home'] = settings.title
+            context['text_portfolio'] = settings.text_portfolio
+            context['text_about'] = settings.text_about
 
         return context
 

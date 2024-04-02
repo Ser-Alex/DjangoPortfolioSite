@@ -47,3 +47,28 @@ class HistoryImage(models.Model):
     class Meta:
         verbose_name = 'Изображение'
         verbose_name_plural = 'Изображения'
+
+
+class SiteSettings(models.Model):
+    title = models.CharField(verbose_name='Заголовок', max_length=100)
+    image = models.ImageField(upload_to='image_main/')
+    text_portfolio = models.TextField(verbose_name='Текст портфолио', max_length=400)
+    text_about = models.TextField(verbose_name='Текст обо мне', max_length=400)
+
+    def save(self, *args, **kwargs):
+        self.__class__.objects.exclude(id=self.id).delete()
+        super(SiteSettings, self).save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        try:
+            return cls.objects.get()
+        except cls.DoesNotExist:
+            return cls()
+
+    class Meta:
+        verbose_name = 'настройки сайта'
+        verbose_name_plural = 'настройки сайта'
+
+    def __str__(self):
+        return 'Нажми сюда, чтобы настроить!'
