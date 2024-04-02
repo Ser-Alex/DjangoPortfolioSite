@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from portfolio.views import IndexView
+from portfolio.views import IndexView, HistoryWeddingsView
 
 app_name = 'portfolio'
 
+
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
+    path('<slug:slug>/', HistoryWeddingsView.as_view(), name='history_wedding'),
 ]

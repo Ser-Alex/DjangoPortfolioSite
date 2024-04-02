@@ -10,10 +10,14 @@
                     {% for history in history_weddings %}
                         <div class="col-md-4 col-sm-4 col-xs-6 col-xxs-12 animate-box">
                             <div class="img-grid img-grid-container">
-                                <img src="{{ history.preview_small.url }}">
-                                <a href="" class="transition">
+                                {% if history.preview_small %}
+                                    <img src="{{ history.preview_small.url }}">
+                                {% else %}
+                                    <img src="{{ history.preview.url }}">
+                                {% endif %}
+                                <a href="{% url 'portfolio:history_wedding' slug=history.slug %}" class="transition">
                                     <div>
-                                        <span class="fh5co-meta">15 images</span>
+                                        <span class="fh5co-meta"></span>
                                         <h2 class="fh5co-title">{{ history.title }}</h2>
                                     </div>
                                 </a>

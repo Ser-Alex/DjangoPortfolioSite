@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div id="fh5co-main">
+		<div class="fh5co-overlay-mobile"></div>
+		{% include "home.html" %}
+        <div id="fh5co-content">
+			<div class="container">
+				<div class="row r-pb">
+					<div class="col-md-8 col-md-offset-2 text-center section-heading">
+						<h2 class="fh5co-section-title animate-box">Предисловие</h2>
+						<p class="fh5co-lead animate-box">{{ intro }}</p>
+					</div>
+				</div>
+
+				<div class="row">
+                    {% for img in images %}
+                        <figure class="animate-box">
+                            <img src="{{ img.image.url }}" class="img-responsive">
+                        </figure>
+					{% endfor %}
+				</div>
+	
+			</div>
+		</div>
+    </div>
+    </div>
+{% endblock %}
