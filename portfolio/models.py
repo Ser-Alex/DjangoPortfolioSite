@@ -34,6 +34,9 @@ class HistoryWedding(models.Model):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
+    def __str__(self):
+        return self.slug
+
     class Meta:
         verbose_name = 'Историю'
         verbose_name_plural = 'Истории'
@@ -68,9 +71,18 @@ class SiteSettings(models.Model):
         except cls.DoesNotExist:
             return cls()
 
+    def __str__(self):
+        return 'Нажми сюда, чтобы настроить!'
+
     class Meta:
         verbose_name = 'настройки сайта'
         verbose_name_plural = 'настройки сайта'
 
-    def __str__(self):
-        return 'Нажми сюда, чтобы настроить!'
+
+class Testimony(models.Model):
+    text = models.TextField(verbose_name='Текст', max_length=400)
+    author = models.CharField(verbose_name='Автор', max_length=100)
+
+    class Meta:
+        verbose_name = 'Высказывание'
+        verbose_name_plural = 'Высказывания'

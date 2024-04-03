@@ -1,0 +1,18 @@
+<div id="fh5co-testimony" data-stellar-background-ratio="0.5">
+			<div class="fh5co-overlay"></div>
+			<div class="container">
+				<div class="row">
+					<div class="flexslider animate-box">
+							<ul class="slides">
+                                {% for say in testimony %}
+								<li>
+									<blockquote>
+										<p>{{ say.text }}<cite>&mdash; {{ say.author }}</cite></p>
+									</blockquote>
+                                {% endfor %}
+							</ul>
+						</div>
+
+				</div>
+			</div>
+		</div>

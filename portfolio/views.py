@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 
-from portfolio.models import HistoryWedding, SiteSettings
+from portfolio.models import HistoryWedding, SiteSettings, Testimony
 
 
 class IndexView(TemplateView):
@@ -11,6 +11,7 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         context['history_weddings'] = HistoryWedding.objects.filter(active=True)
+        context['testimony'] = Testimony.objects.all()
 
         if SiteSettings.objects.exists():
             settings = SiteSettings.objects.first()

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.utils import ProgrammingError
 
-from portfolio.models import HistoryWedding, HistoryImage, SiteSettings
+from portfolio.models import HistoryWedding, HistoryImage, SiteSettings, Testimony
 
 
 class HistoryInlineImages(admin.TabularInline):
@@ -10,8 +10,8 @@ class HistoryInlineImages(admin.TabularInline):
 
 
 @admin.register(HistoryWedding)
-class AdminBannerCategory(admin.ModelAdmin):
-    list_display = ['title', 'intro', 'active']
+class HistoryWeddingAdmin(admin.ModelAdmin):
+    list_display = ['title', 'short_intro', 'active']
     prepopulated_fields = {'slug': ('title',)}
     inlines = [HistoryInlineImages]
     fieldsets = (
@@ -24,7 +24,19 @@ class AdminBannerCategory(admin.ModelAdmin):
         }),
     )
 
+    def short_intro(self, obj):
+        return obj.intro[:50]
 
+
+@admin.register(Testimony)
+class TestimonyAdmin(admin.ModelAdmin):
+    list_display = ['author', 'short_text']
+
+    def short_text(self, obj):
+        return obj.text[:50]
+
+
+@admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
     # Create a default object on the first page of SiteSettingsAdmin with a list of settings
     def __init__(self, model, admin_site):
@@ -43,6 +55,3 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     # as well as deleting existing
     def has_delete_permission(self, request, obj=None):
         return False
-
-
-admin.site.register(SiteSettings, SiteSettingsAdmin)
