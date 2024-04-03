@@ -18,6 +18,8 @@ class IndexView(TemplateView):
             context['text_home'] = settings.title
             context['text_portfolio'] = settings.text_portfolio
             context['text_about'] = settings.text_about
+            context['text_contact'] = settings.text_contact
+            context['link_contact'] = settings.link_contact
 
         return context
 

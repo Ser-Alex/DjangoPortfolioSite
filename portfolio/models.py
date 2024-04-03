@@ -54,6 +54,8 @@ class SiteSettings(models.Model):
     image = models.ImageField(upload_to='image_main/')
     text_portfolio = models.TextField(verbose_name='Текст портфолио', max_length=400)
     text_about = models.TextField(verbose_name='Текст обо мне', max_length=400)
+    text_contact = models.TextField(verbose_name='Текст контактов', max_length=400)
+    link_contact = models.CharField(verbose_name='Ссылка контактов', max_length=100)
 
     def save(self, *args, **kwargs):
         self.__class__.objects.exclude(id=self.id).delete()
